@@ -1,3 +1,4 @@
 #this is gitignore
 *.user
-TemPics/
+SrcPics/
+FilPics/

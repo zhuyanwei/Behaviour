@@ -18,3 +18,7 @@ SOURCES += main.cpp\
 HEADERS  += widget.h
 
 FORMS    += widget.ui
+
+INCLUDEPATH += D:\OpenCV\install\include
+
+LIBS += -LD:\OpenCV\install\bin -llibopencv_core231 -llibopencv_highgui231 -llibopencv_imgproc231

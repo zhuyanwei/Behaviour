@@ -2,6 +2,12 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <QDebug>
+
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
+
+using namespace cv;
 
 namespace Ui {
 class Widget;
@@ -17,6 +23,7 @@ public:
 
 private:
     Ui::Widget *ui;
+    void funSobel();
 };
 
 #endif // WIDGET_H
