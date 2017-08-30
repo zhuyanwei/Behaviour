@@ -49,11 +49,13 @@ void Widget::timePart()
     if (frameBefo.empty()) return;
 
     showPic(frame,1);
-    showPic(frameBefo,2);
     frameTemp = frameDif.matDif(frame,frameBefo);
-    showPic(frameTemp,3);
-    frameDif.getValue(frameTemp);
-    showPic(frameDif.histOut,4);
+    showPic(frameTemp,2);
+    classHis1.classGet(frame);
+    classHis1.histAll();
+    showPic(classHis1.outMat,3);
+    threshold(frame,frameTemp,60,255,THRESH_BINARY);
+    showPic(frameTemp,4);
 //    qDebug()<<"frame depth---before"<<frame.depth()<<"after"<<frameTemp.depth();
     return;
     //process this frame

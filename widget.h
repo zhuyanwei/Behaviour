@@ -14,6 +14,7 @@
 #include "CameraGet.h"
 #include "PreProcess.h"
 #include "FrameDif.h"
+#include "ClassHistogram.h"
 
 using namespace cv;
 
@@ -34,6 +35,7 @@ private:
 
     PreProcess preProcess;
     FrameDif frameDif;
+    ClassHistogram classHis1;
 
     QTimer *timer;
     QImage qimg;
