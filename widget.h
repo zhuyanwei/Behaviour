@@ -12,6 +12,8 @@
 #include <opencv2/imgproc/imgproc.hpp>
 
 #include "CameraGet.h"
+#include "PreProcess.h"
+#include "FrameDif.h"
 
 using namespace cv;
 
@@ -30,21 +32,28 @@ public:
 private:
     Ui::Widget *ui;
 
+    PreProcess preProcess;
+    FrameDif frameDif;
+
     QTimer *timer;
     QImage qimg;
-    Mat frame;
+    Mat frame,frameBefo;
+    Mat frameGray,frameX,frameY,frameNor;
     VideoCapture cap;
     CameraGet cg;
+    bool isFinish;
 
     void funSobel();
     void funVideo();
     QImage mat2QImage(Mat cvImg);
+    void showPic(Mat inFrame, int part);
 
 signals:
     getFrame();
 
 private slots:
     void on_B_OK();
+    void on_B_Pause();
     void timePart();
     void updateWindow();
 

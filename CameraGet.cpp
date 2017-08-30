@@ -18,6 +18,7 @@ int CameraGet::openCamera()
     double w = capture.get(CV_CAP_PROP_FRAME_WIDTH);
     double h = capture.get(CV_CAP_PROP_FRAME_HEIGHT);
     double f = capture.get(CV_CAP_PROP_FPS );
+    qDebug()<<"camera info:";
     qDebug()<<"before---width"<<w<<"height"<<h<<"fps"<<f;
 
     capture.set(CV_CAP_PROP_FRAME_WIDTH,WIDTH);
@@ -26,7 +27,7 @@ int CameraGet::openCamera()
     h = capture.get(CV_CAP_PROP_FRAME_HEIGHT);
     qDebug()<<"reset---width"<<w<<"height"<<h<<"fps"<<f;
 
-    qDebug()<<"+++ Camera Opened,all clear";
+    qDebug()<<"+++ Camera Opened";
     return 0;
 }
 

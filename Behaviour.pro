@@ -14,14 +14,22 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         widget.cpp \
-    CameraGet.cpp
+    CameraGet.cpp \
+    PreProcess.cpp \
+    FrameDif.cpp
 
 HEADERS  += widget.h \
     CameraGet.h \
-    COMDEF.h
+    COMDEF.h \
+    PreProcess.h \
+    FrameDif.h
 
 FORMS    += widget.ui
+
+DISTFILES += \
+    README.md
 
 INCLUDEPATH += D:\OpenCV\install\include
 
 LIBS += -LD:\OpenCV\install\bin -llibopencv_core231 -llibopencv_highgui231 -llibopencv_imgproc231
+
