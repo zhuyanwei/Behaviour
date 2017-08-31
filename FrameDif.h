@@ -7,16 +7,26 @@
 #include "opencv2/core/core.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 
+#include "ClassHistogram.h"
+#include "COMDEF.h"
+
 using namespace cv;
 
 class FrameDif
 {
 public:
     FrameDif();
-    Mat matDif(Mat inMat, Mat inMatBefo);
-    void getValue(Mat &inMat);
+    void classGet(Mat inMat, Mat inMatBefo);
+    Mat frameDifAll();
+    Mat calcuDif(Mat inMat, Mat inMatBefo);
 
-    Mat histOut;
+    Mat diffMat;
+    Mat diffHist;
+private:
+    Mat frame;
+    Mat frameBefore;
+
+    ClassHistogram ch;
 };
 
 #endif // FRAMEDIF_H
