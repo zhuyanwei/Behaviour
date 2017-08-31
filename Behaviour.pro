@@ -17,14 +17,16 @@ SOURCES += main.cpp\
     CameraGet.cpp \
     PreProcess.cpp \
     FrameDif.cpp \
-    ClassHistogram.cpp
+    ClassHistogram.cpp \
+    BackDif.cpp
 
 HEADERS  += widget.h \
     CameraGet.h \
     COMDEF.h \
     PreProcess.h \
     FrameDif.h \
-    ClassHistogram.h
+    ClassHistogram.h \
+    BackDif.h
 
 FORMS    += widget.ui
 

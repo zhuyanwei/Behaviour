@@ -7,7 +7,9 @@
 //pre process
 #define GASSIANBLUR1 3
 //frame diff
-#define THRES_FRAMEDIF 20
+#define THRES_FRAMEDIF 200
+//background diff
+#define BACKGROUND_AVRG_N 30
 //#define CV_8U   0
 //#define CV_8S   1
 //#define CV_16U  2

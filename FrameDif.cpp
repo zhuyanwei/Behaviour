@@ -22,8 +22,8 @@ Mat FrameDif::frameDifAll()
 {
     Mat temp;
     //calulate diff
-    diffMat = calcuDif(frame,frameBefore);
-    temp = diffMat;
+    temp = calcuDif(frame,frameBefore);
+    diffMat = temp.clone();
     //histogram analyze
     ch.classGet(temp);
     ch.histAll();
