@@ -25,10 +25,18 @@ Mat PreProcess::gassianFil(Mat inMat)
     return frameGassian;
 }
 
+Mat PreProcess::cvt32f(Mat inMat)
+{
+    Mat mat32f;
+    inMat.convertTo(mat32f,CV_32FC1);
+    return mat32f;
+}
+
 Mat PreProcess::preAll()
 {
     Mat temp;
     temp = comvertSpace(frame);
+//    temp = cvt32f(temp);
 //    temp = gassianFil(temp);
     return temp;
 }

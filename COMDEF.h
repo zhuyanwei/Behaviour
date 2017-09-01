@@ -2,6 +2,7 @@
 #define COMDEF_H
 
 //common
+#include <QDebug>
 #define DB qDebug()
 //show gui
 #define WIDTH 320

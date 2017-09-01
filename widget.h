@@ -55,6 +55,9 @@ private:
     //frame diff
     Mat frameBefo;
     void scptFrameDif();
+    //background diff
+    int backgroundN;
+    void scptBackDif();
 
 signals:
     getFrame();

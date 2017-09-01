@@ -18,6 +18,7 @@ public:
 private:
     Mat comvertSpace(Mat inMat);
     Mat gassianFil(Mat inMat);
+    Mat cvt32f(Mat inMat);
 
     Mat frame;
 };
