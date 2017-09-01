@@ -12,8 +12,12 @@ class BackDif
 {
 public:
     BackDif();
-    void backgroundAvrg();
+    void backgroundAvrg(Mat inMat);
     void backgroundGass();
+
+    Mat backTemp;
+    Mat backAccumulate;
+    Mat backOut;
 };
 
 #endif // BACKDIF_H

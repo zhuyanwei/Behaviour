@@ -15,6 +15,7 @@
 #include "PreProcess.h"
 #include "FrameDif.h"
 #include "ClassHistogram.h"
+#include "BackDif.h"
 
 using namespace cv;
 
@@ -36,10 +37,11 @@ private:
     PreProcess preProcess;
     FrameDif frameDif;
     ClassHistogram classHis1;
+    BackDif backDif;
 
     QTimer *timer;
     QImage qimg;
-    Mat frame,frameBefo;
+    Mat frame;
     Mat frameGray,frameX,frameY,frameNor;
     VideoCapture cap;
     CameraGet cg;
@@ -49,6 +51,10 @@ private:
     void funVideo();
     QImage mat2QImage(Mat cvImg);
     void showPic(Mat inFrame, int part);
+
+    //frame diff
+    Mat frameBefo;
+    void scptFrameDif();
 
 signals:
     getFrame();

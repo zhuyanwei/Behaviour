@@ -1,13 +1,15 @@
 #ifndef COMDEF_H
 #define COMDEF_H
 
+//common
+#define DB qDebug()
 //show gui
 #define WIDTH 320
 #define HEIGHT 240
 //pre process
 #define GASSIANBLUR1 3
 //frame diff
-#define THRES_FRAMEDIF 200
+#define THRES_FRAMEDIF 20
 //background diff
 #define BACKGROUND_AVRG_N 30
 //#define CV_8U   0

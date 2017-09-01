@@ -37,49 +37,57 @@ void Widget::on_B_Pause()
 
 void Widget::timePart()
 {
-    Mat frameTemp;
-    //get this frame(not pre processed)
-    cg.readFrame();
-    if (cg.frame.empty()) return;
-    //get the pre frame(pre processed)
-    frameBefo = frame;
-    //origin from camera,pre process
-    preProcess.preGet(cg.frame);
-    frame = preProcess.preAll();
-    if (frameBefo.empty()) return;
+    scptFrameDif();
+//    Mat frameTemp;
+//    //get this frame(not pre processed)
+//    cg.readFrame();
+//    if (cg.frame.empty()) return;
+//    //get the pre frame(pre processed)
+//    frameBefo = frame;
+//    //origin from camera,pre process
+//    preProcess.preGet(cg.frame);
+//    frame = preProcess.preAll();
+//    if (frameBefo.empty()) return;
 
-    showPic(frame,1);
+//    showPic(frame,1);
 
-    frameDif.classGet(frame,frameBefo);
-    frameTemp = frameDif.frameDifAll();
-    showPic(frameDif.diffMat,2);
-    showPic(frameDif.diffHist,3);
-    showPic(frameTemp,4);
-//    qDebug()<<"frame depth---before"<<frame.depth()<<"after"<<frameTemp.depth();
-    return;
-    //process this frame
-    Sobel(frameGray,frameX,CV_8U,1,0);
-    Sobel(frameGray,frameY,CV_8U,0,1);
-    frameNor = abs(frameX) + abs(frameY);
-    qimg = mat2QImage(frameNor);
-    ui->L_Proc0->setPixmap(QPixmap::fromImage(qimg));
+//    for(int i = 1;i <= BACKGROUND_AVRG_N;i++)
+//    {
+//        backDif.backgroundAvrg(frame);
+//        DB<<i;
+//        return;
+//    }
+//    DB<<"calu back done";
+//    frameDif.classGet(frame,frameBefo);
+//    frameTemp = frameDif.frameDifAll();
+//    showPic(frameDif.diffMat,2);
+//    showPic(frameDif.diffHist,3);
+//    showPic(frameTemp,4);
+////    qDebug()<<"frame depth---before"<<frame.depth()<<"after"<<frameTemp.depth();
+//    return;
+//    //process this frame
+//    Sobel(frameGray,frameX,CV_8U,1,0);
+//    Sobel(frameGray,frameY,CV_8U,0,1);
+//    frameNor = abs(frameX) + abs(frameY);
+//    qimg = mat2QImage(frameNor);
+//    ui->L_Proc0->setPixmap(QPixmap::fromImage(qimg));
 
-//    //method2 0.5weight
-//    convertScaleAbs( frameX, frameX );
-//    convertScaleAbs( frameY, frameY );
-//    addWeighted( frameX, 1.0, frameY, 1.0, 0, frameTemp );
-//    qimg = mat2QImage(frameTemp);
-//    ui->L_ProcY->setPixmap(QPixmap::fromImage(qimg));
-//    qDebug()<<"camera---depth"<<cg.frame.depth()<<"channel"<<cg.frame.channels();
-//    qDebug()<<"after---depth"<<frameX.depth()<<"channel"<<frameX.channels();
-    //restore the exact frame
-    if(isFinish == false)
-    {
-        imwrite("../Behaviour/FilPics/add2.jpg",frameNor);
-        imwrite("../Behaviour/FilPics/add2_weight100.jpg",frameTemp);
-        isFinish = true;
-        qDebug("restore done");
-    }
+////    //method2 0.5weight
+////    convertScaleAbs( frameX, frameX );
+////    convertScaleAbs( frameY, frameY );
+////    addWeighted( frameX, 1.0, frameY, 1.0, 0, frameTemp );
+////    qimg = mat2QImage(frameTemp);
+////    ui->L_ProcY->setPixmap(QPixmap::fromImage(qimg));
+////    qDebug()<<"camera---depth"<<cg.frame.depth()<<"channel"<<cg.frame.channels();
+////    qDebug()<<"after---depth"<<frameX.depth()<<"channel"<<frameX.channels();
+//    //restore the exact frame
+//    if(isFinish == false)
+//    {
+//        imwrite("../Behaviour/FilPics/add2.jpg",frameNor);
+//        imwrite("../Behaviour/FilPics/add2_weight100.jpg",frameTemp);
+//        isFinish = true;
+//        qDebug("restore done");
+//    }
 }
 
 void Widget::funSobel()
@@ -191,4 +199,34 @@ void Widget::showPic(Mat inFrame,int part)
     }
 }
 
+void Widget::scptFrameDif()
+{
+    Mat frameTemp;
+    //get this frame(not pre processed)
+    cg.readFrame();
+    if (cg.frame.empty()) return;
+    //get the pre frame(pre processed)
+    frameBefo = frame;
+    //origin from camera,pre process
+    preProcess.preGet(cg.frame);
+    frame = preProcess.preAll();
+    if (frameBefo.empty()) return;
+
+    showPic(frame,1);
+
+    frameDif.classGet(frame,frameBefo);
+    frameTemp = frameDif.frameDifAll();
+    showPic(frameDif.diffMat,2);
+    showPic(frameDif.diffHist,3);
+    showPic(frameTemp,4);
+//    qDebug()<<"frame depth---before"<<frame.depth()<<"after"<<frameTemp.depth();
+    //restore the exact frame
+    if(isFinish == false)
+    {
+        imwrite("../Behaviour/FilPics/add2.jpg",frameNor);
+        imwrite("../Behaviour/FilPics/add2_weight100.jpg",frameTemp);
+        isFinish = true;
+        qDebug("restore done");
+    }
+}
 
