@@ -9,7 +9,9 @@ Widget::Widget(QWidget *parent) :
 
     //initial paras
     isFinish = true;
-    backgroundN = 1;
+        //background diff
+    backgroundN = BACKGROUND_AVRG_N;
+
     //timer
     timer = new QTimer(this);
     timer->setInterval(100);
@@ -21,6 +23,10 @@ Widget::Widget(QWidget *parent) :
     connect(this,SIGNAL(getFrame()),this,SLOT(updateWindow()));
 
     qDebug("widget instruct done");
+    //temp test
+//    Mat m1;
+//    m1 =  Mat(2,2,CV_32FC1, Scalar(255.0));
+//    std::cout<<m1;
 }
 
 Widget::~Widget()
@@ -40,33 +46,26 @@ void Widget::on_B_Pause()
 
 void Widget::timePart()
 {
-    Mat frameTemp;
     //get this frame(not pre processed)
     cg.readFrame();
     if (cg.frame.empty()) return;
-    //get the pre frame(pre processed)
-    frameBefo = frame;
     //origin from camera,pre process
-    DB<<"before--"<<cg.frame.type();
     preProcess.preGet(cg.frame);
     frame = preProcess.preAll();
-    if (frameBefo.empty()) return;
-    DB<<"after--"<<frame.type();
-
-
     showPic(frame,1);
-    frame.convertTo(frameTemp,CV_32FC1);
-    showPic(frameTemp,2);
-    DB<<"after all--"<<frameTemp.type();
-
-//    Mat aa;
-//    aa.create(10,10,CV_32FC3);
-//    DB<<"---depth"<<aa.depth()<<"---type"<<aa.type();
-//    backDif.backgroundAvrg(frame);
-//    frameTemp = backDif.backAccumulate;
-//    showPic(frameTemp,2);
-
-//    qDebug()<<"frame depth---before"<<frame.depth()<<"after"<<frameTemp.depth();
+    //calculate accumulation
+    if(backgroundN)
+    {
+        backDif.backgroundAvrg(frame);
+        backgroundN--;
+    }
+    showPic(backDif.backAccumulate,2);
+    if(backgroundN == 0)
+    {
+        backDif.getBack(backDif.backAccumulate);
+        showPic(backDif.backOut,3);
+        showPic(backDif.calcuDiff(frame),4);
+    }
     return;
     //process this frame
 //    CV_8UC1
@@ -76,19 +75,10 @@ void Widget::timePart()
     qimg = mat2QImage(frameNor);
     ui->L_Proc0->setPixmap(QPixmap::fromImage(qimg));
 
-//    //method2 0.5weight
-//    convertScaleAbs( frameX, frameX );
-//    convertScaleAbs( frameY, frameY );
-//    addWeighted( frameX, 1.0, frameY, 1.0, 0, frameTemp );
-//    qimg = mat2QImage(frameTemp);
-//    ui->L_ProcY->setPixmap(QPixmap::fromImage(qimg));
-//    qDebug()<<"camera---depth"<<cg.frame.depth()<<"channel"<<cg.frame.channels();
-//    qDebug()<<"after---depth"<<frameX.depth()<<"channel"<<frameX.channels();
     //restore the exact frame
     if(isFinish == false)
     {
         imwrite("../Behaviour/FilPics/add2.jpg",frameNor);
-        imwrite("../Behaviour/FilPics/add2_weight100.jpg",frameTemp);
         isFinish = true;
         qDebug("restore done");
     }
@@ -156,6 +146,7 @@ void Widget::updateWindow()
 QImage Widget::mat2QImage(Mat cvImg)
 {
     QImage qImg;
+    Mat matTemp;
     if(cvImg.channels()==3)
     {
         cvtColor(cvImg,cvImg,CV_BGR2RGB);
@@ -171,11 +162,14 @@ QImage Widget::mat2QImage(Mat cvImg)
                         cvImg.cols,cvImg.rows,
                         cvImg.cols * cvImg.channels(),
                         QImage::Format_Indexed8);
-//        else if(cvImg.type() == CV_32FC1)
-//            qImg =QImage((const float*)(cvImg.data),
-//                        cvImg.cols,cvImg.rows,
-//                        cvImg.cols * cvImg.channels(),
-//                        QImage::Format_ARGB32);
+        else if(cvImg.type() == CV_32FC1)
+        {
+            cvImg.convertTo(matTemp,CV_8UC1);
+            qImg =QImage((const unsigned char*)(matTemp.data),
+                        matTemp.cols,matTemp.rows,
+                        matTemp.cols * matTemp.channels(),
+                        QImage::Format_Indexed8);
+        }
     }
     else
     {
@@ -184,6 +178,7 @@ QImage Widget::mat2QImage(Mat cvImg)
                     cvImg.cols * cvImg.channels(),
                     QImage::Format_RGB888);
     }
+    qImg.bits();
     return qImg;
 }
 

@@ -12,7 +12,7 @@
 //frame diff
 #define THRES_FRAMEDIF 20
 //background diff
-#define BACKGROUND_AVRG_N 30
+#define BACKGROUND_AVRG_N 100.0
 //#define CV_8U   0
 //#define CV_8S   1
 //#define CV_16U  2

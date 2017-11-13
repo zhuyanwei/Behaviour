@@ -36,7 +36,7 @@ Mat PreProcess::preAll()
 {
     Mat temp;
     temp = comvertSpace(frame);
-//    temp = cvt32f(temp);
+    temp = cvt32f(temp);
 //    temp = gassianFil(temp);
     return temp;
 }

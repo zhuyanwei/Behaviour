@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QTimer>
 #include <QImage>
+#include <iostream>
 #include <unistd.h>
 
 #include <opencv2/core/core.hpp>
@@ -37,7 +38,6 @@ private:
     PreProcess preProcess;
     FrameDif frameDif;
     ClassHistogram classHis1;
-    BackDif backDif;
 
     QTimer *timer;
     QImage qimg;
@@ -56,6 +56,7 @@ private:
     Mat frameBefo;
     void scptFrameDif();
     //background diff
+    BackDif backDif;
     int backgroundN;
     void scptBackDif();
 

@@ -14,6 +14,8 @@ public:
     BackDif();
     void backgroundAvrg(Mat inMat);
     void backgroundGass();
+    Mat getBack(Mat inMat);
+    Mat calcuDiff(Mat inMat);
 
     Mat backTemp;
     Mat backAccumulate;
