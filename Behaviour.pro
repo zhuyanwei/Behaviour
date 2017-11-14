@@ -18,7 +18,10 @@ SOURCES += main.cpp\
     PreProcess.cpp \
     FrameDif.cpp \
     ClassHistogram.cpp \
-    BackDif.cpp
+    BackDif.cpp \
+    ForegroundExtraction.cpp \
+    bgfg_vibe.cpp \
+    PBAS.cpp
 
 HEADERS  += widget.h \
     CameraGet.h \
@@ -26,7 +29,10 @@ HEADERS  += widget.h \
     PreProcess.h \
     FrameDif.h \
     ClassHistogram.h \
-    BackDif.h
+    BackDif.h \
+    ForegroundExtraction.h \
+    bgfg_vibe.hpp \
+    PBAS.h
 
 FORMS    += widget.ui
 
@@ -35,5 +41,5 @@ DISTFILES += \
 
 INCLUDEPATH += D:\OpenCV\install\include
 
-LIBS += -LD:\OpenCV\install\bin -llibopencv_core231 -llibopencv_highgui231 -llibopencv_imgproc231
+LIBS += -LD:\OpenCV\install\bin -llibopencv_core231 -llibopencv_highgui231 -llibopencv_imgproc231 -llibopencv_video231
 

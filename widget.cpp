@@ -24,9 +24,6 @@ Widget::Widget(QWidget *parent) :
 
     qDebug("widget instruct done");
     //temp test
-//    Mat m1;
-//    m1 =  Mat(2,2,CV_32FC1, Scalar(255.0));
-//    std::cout<<m1;
 }
 
 Widget::~Widget()
@@ -41,7 +38,8 @@ void Widget::on_B_OK()
 }
 void Widget::on_B_Pause()
 {
-    isFinish = false;
+    funVideo();
+//    isFinish = false;
 }
 
 void Widget::timePart()
@@ -113,27 +111,44 @@ void Widget::funSobel()
 
 void Widget::funVideo()
 {
-    VideoCapture cap("../Behaviour/SrcPics/goout.flv");
-    if(!cap.isOpened())
-    {
-        qDebug("open video fail");
-        return;
-    }
-    double rate = cap.get(CV_CAP_PROP_FPS);
-    bool stop(false);
-    int i = 0;
-    cap.read(frame);
-    if (!frame.empty())
-    {
-        qimg = mat2QImage(frame);
-        ui->L_Src->setPixmap(QPixmap::fromImage(qimg));
-        timer = new QTimer(this);
-        timer->setInterval(1000/rate);
-        connect(timer, SIGNAL(timeout()), this, SLOT(timePart()));
-        timer->start();
-    }
+    Mat m1;
+    m1 = imread("../Behaviour/SrcPics/lena.jpg");
+//    namedWindow("sss",CV_GUI_EXPANDED);
+    waitKey(30);
+//    findContours
+    imshow("sss",m1);
+    waitKey(30);
+
+//    VideoCapture cap;
+//    cap.open("../Behaviour/SrcPics/Curtain.avi");
+//    if(!cap.isOpened())
+//    {
+//        qDebug("open video fail");
+//        return;
+//    }
+//    double rate = cap.get(CV_CAP_PROP_FPS);
+//    bool stop = false;
+//    int i = 0;
+//    while(!stop)
+//    {
+//        cap.read(frame);
+//        if(!frame.empty())
+//        {
+////            qimg = mat2QImage(frame);
+////            ui->L_Src->setPixmap(QPixmap::fromImage(qimg));
+////            timer = new QTimer(this);
+////            timer->setInterval(1000/rate);
+////            connect(timer, SIGNAL(timeout()), this, SLOT(timePart()));
+////            timer->start();
+//            waitKey(10000);
+////            cvWaitKey(100000000);
+//            DB<<"12";
+//        }
+//        else
+//            break;
+//    }
 //    cap.release();
-    qDebug("finish funVideo");
+//    DB<<"finish video,rate:"<<rate;
 }
 
 //**********************************GUI

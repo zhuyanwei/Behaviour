@@ -17,6 +17,8 @@
 #include "FrameDif.h"
 #include "ClassHistogram.h"
 #include "BackDif.h"
+#include "ForegroundExtraction.h"
+#include "PBAS.h"
 
 using namespace cv;
 
@@ -52,6 +54,8 @@ private:
     QImage mat2QImage(Mat cvImg);
     void showPic(Mat inFrame, int part);
 
+    //foreground extraction
+    ForegroundExtraction fe;
     //frame diff
     Mat frameBefo;
     void scptFrameDif();

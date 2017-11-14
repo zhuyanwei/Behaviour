@@ -15,6 +15,12 @@ int CameraGet::openCamera()
     if (capture.isOpened())
         capture.release();
     capture.open(0);
+//    capture.open("../Behaviour/SrcPics/Curtain.avi");
+    if (!capture.isOpened())
+    {
+        DB<<"No camera or video input!\n"<<endl;
+        return -1;
+    }
     double w = capture.get(CV_CAP_PROP_FRAME_WIDTH);
     double h = capture.get(CV_CAP_PROP_FRAME_HEIGHT);
     double f = capture.get(CV_CAP_PROP_FPS );
